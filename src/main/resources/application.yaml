@@ -1,0 +1,54 @@
+server:
+  port: 8080
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  jpa:
+    properties:
+      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        storage_engine: innodb
+        connection:
+          charSet: UTF-8
+        hbm2ddl:
+          import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+    hibernate:
+      naming_strategy: org.hibernate.cfg.EJB3NamingStrategy
+      #ddl-auto: create
+      #ddl-auto: update
+      ddl-auto: create-drop
+    show_sql: true
+  datasource:
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/transactions?allowPublicKeyRetrieval=true&useSSL=false
+    initialization-mode: always
+  application:
+    name: transactions-and-concurrency-service
+  banner:
+    location: classpath:/banner-dev.txt
+
+springfox:
+  documentation:
+    swagger-ui:
+      baseUrl: transactions-and-concurrency-service
+
+swagger:
+  title: ^project.name^
+  description: ^project.description^
+  version: ^project.version^
+  termsOfServiceUrl: \#
+  contactName: Someguy
+  contactUrl: /#
+  contactEmail: dev.mail@email.com
+  license: License of API
+  licenseUrl: https://www.learning.com
+
+## Configuring actuator/info endpoint
+info:
+  app:
+    name: transactions-and-concurrency-service
+    description: Understanding database transactions
+    version: 1.0.0
